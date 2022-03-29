@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Details</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<style>
+    #align2items{
+        display: flex;
+        justify-content: space-between;
+    }
+    #align2itemsEducation{
+        display: flex;
+        justify-content: space-between;
+    }
+    #align2itemsMenu0{
+        display: flex;
+        justify-content: space-between;
+    }
+    #align2itemsMenu1{
+        display: flex;
+        justify-content: space-between;
+    }
+    #align2itemsFiles{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /*td{
+        font-size: 18px;
+        font-family: math;
+        font-weight: 600;
+    }*/
+</style>
+<body>
+<div class="login-registration-main application-main">
+    <section>
+        <div class="application-main-part">
+            <div class="container-fuild">
+                <div class="application-middle-part">
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <div class="application-left-part">
+                                <!-- <div class="profile-pic">
+                                    <img src="images/use-name.jpg" alt="images" />
+                                    <h2>Hitesh</h2>
+                                </div> -->
+                                <h2><img th:src="@{/images/logo.svg}" alt="images" /></h2>
+                                <ul>
+                                    <li>
+                                        <a href="#" onclick="toggleVisibility('Menu0');" class="activemenucheckclass active"><i class="fa fa-location-arrow" aria-hidden="true"></i>Personal Details</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="toggleVisibility('Menu1');" class="activemenucheckclass"><i class="fa fa-location-arrow" aria-hidden="true"></i>Address</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="toggleVisibility('Menu2');" class="activemenucheckclass"><i class="fa fa-briefcase" aria-hidden="true"></i>Work Experience</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="toggleVisibility('Menu3');" class="activemenucheckclass"><i class="fa fa-mortar-board" aria-hidden="true"></i>Education</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="toggleVisibility('Menu4');" class="activemenucheckclass"><i class="fa fa-mortar-board" aria-hidden="true"></i>Files</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-8 mobile-full-part">
+                            <div class="d-flex justify-content-md-center align-items-center vh-100">
+                                <div class="application-right-part">
+
+                                    <div class="personal-part" id="Menu0">
+                                        <div id="align2itemsMenu0">
+                                            <h2>Personal Details</h2>
+                                            <a th:href="@{/user/personal-details/update}"><button class="btn btn-primary" >Update</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <table border="2" class="table table-bordered table-responsive-md">
+                                                <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>First Name</th>
+                                                    <th>Middle Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Date of birth</th>
+                                                    <th>Gender</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td th:text="${user.title}"></td>
+                                                    <td th:text="${user.firstName}"></td>
+                                                    <td th:text="${user.middleName}"></td>
+                                                    <td th:text="${user.lastName}"></td>
+                                                    <td th:text="${user.dob}"></td>
+                                                    <td th:text="${user.gender}"></td>
+                                                    <td th:text="${user.phoneNumber}"></td>
+                                                    <td th:text="${user.email}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="personal-part" style="display: none" id="Menu1">
+                                        <div id="align2itemsMenu1">
+                                            <h2>Address</h2>
+                                            <a th:href="@{/user/address/update/{id}(id=${user.getId()})}"><button class="btn btn-primary" >Update</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <table border="2" class="table table-bordered table-responsive-md">
+                                                <thead>
+                                                <tr>
+                                                    <th>Address Line 1</th>
+                                                    <th>Address Line 2</th>
+                                                    <th>Area</th>
+                                                    <th>Pin code</th>
+                                                    <th>City</th>
+                                                    <th>State</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td th:text="${user.getAddress().addressLine1}"></td>
+                                                    <td th:text="${user.getAddress().addressLine2}"></td>
+                                                    <td th:text="${user.getAddress().area}"></td>
+                                                    <td th:text="${user.getAddress().pinCode}"></td>
+                                                    <td th:text="${user.getAddress().city}"></td>
+                                                    <td th:text="${user.getAddress().state}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="personal-part" id="Menu2"  style="display: none" >
+                                        <!--<h2>Work Experience</h2>
+                                        <a style="text-align: left; float: left" th:href="@{/users/work/add-more-work-form/{id}(id=${user.getId()})}"><button class="btn btn-primary experience-btn" >Add Work</button></a>-->
+                                        <div id="align2items">
+                                            <h2>Work Experience</h2>
+                                            <a th:href="@{/users/work/add-more-work-form/{id}(id=${user.getId()})}"><button class="btn btn-primary" >Add+</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <table border="2" class="table table-bordered table-responsive-md">
+                                                <thead>
+                                                <tr>
+                                                    <th>Company Name</th>
+                                                    <th>Joining Date</th>
+                                                    <th>Leaving Date</th>
+                                                    <th>Designation At Joining</th>
+                                                    <th>Designation At Leaving</th>
+                                                    <th>Years of Service</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="work : ${user.getWorkExperienceList()}">
+                                                    <td th:text="${work.getCompanyName()}"></td>
+                                                    <td th:text="${work.joiningDate}"></td>
+                                                    <td th:text="${work.leavingDate}"></td>
+                                                    <td th:text="${work.designationAtJoining}"></td>
+                                                    <td th:text="${work.designationAtLeaving}"></td>
+                                                    <td th:text="${work.yearsOfService}"></td>
+                                                    <td>
+                                                        <a th:href="@{/user/work/delete/{workId}/{userId}(workId=${work.id},userId=${user.getId()})}" class="btn btn-danger btn-sm" style="margin-bottom: 2px">Delete</a>
+                                                        <a th:href="@{/user/work/update/{workId}(workId=${work.id})}" class="btn btn-info btn-sm">Update</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="personal-part" id="Menu3" style="display: none;">
+                                        <div id="align2itemsEducation">
+                                            <h2>Education Details</h2>
+                                            <a th:href="@{/users/education/add-more/{id}(id=${user.getId()})}"><button class="btn btn-primary" >Add+</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <table border="2" class="table table-bordered table-responsive-md">
+                                                <thead>
+                                                <tr>
+                                                    <th>Course</th>
+                                                    <th>Starting Date</th>
+                                                    <th>Ending Date</th>
+                                                    <th>Institution Name</th>
+                                                    <th>Percentage Achieved</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="education : ${user.getEducationalDetails()}">
+                                                    <td th:text="${education.getCourse()}"></td>
+                                                    <td th:text="${education.getStartingDate()}"></td>
+                                                    <td th:text="${education.getEndingDate()}"></td>
+                                                    <td th:text="${education.getInstitution()}"></td>
+                                                    <td th:text="${education.getPercentageAchieved()}"></td>
+                                                    <td>
+                                                        <a th:href="@{/user/education/delete/{educationId}/{userId}(educationId=${education.id},userId=${user.getId()})}" class="btn btn-danger btn-sm">Delete</a>
+                                                        <a th:href="@{/user/education/update/{educationId}(educationId=${education.id})}" class="btn btn-info btn-sm">Update</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="personal-part" id="Menu4" style="display: none;">
+                                        <div id="align2itemsFiles">
+                                            <h2>Files Details</h2>
+                                            <a th:href="@{/user/upload/file}"><button class="btn btn-primary" >Add+</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <table border="2" class="table table-bordered table-responsive-md">
+                                                <thead>
+                                                <tr>
+                                                    <th>Document Id</th>
+                                                    <th>Document Name</th>
+                                                    <th>Document Type</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="file : ${filesList}">
+                                                    <td th:text="${file.id}"></td>
+                                                    <td th:text="${file.getDocumentName()}"></td>
+                                                    <td th:text="${file.getType()}"></td>
+                                                    <td>
+                                                        <a th:href="@{/files/single/{id}(id=${file.id})}" class="btn btn-primary btn-sm">Download</a>
+                                                        <a th:href="@{/file/delete/{id}(id=${file.id})}" class="btn btn-danger btn-sm">Delete</a>
+                                                        <a th:href="@{/user/files/update/{fileId}(fileId=${file.id})}" class="btn btn-info btn-sm">Update</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-main-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-6">
+                        <p><a href="#">www.ratnaafin.com</a></p>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <ul>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.563" height="15.563" viewBox="0 0 18.563 18.563">
+                                        <path
+                                                id="Icon_awesome-linkedin-in"
+                                                data-name="Icon awesome-linkedin-in"
+                                                d="M4.155,18.563H.307V6.17H4.155ZM2.229,4.479a2.239,2.239,0,1,1,2.229-2.25A2.248,2.248,0,0,1,2.229,4.479Zm16.33,14.084h-3.84V12.53c0-1.438-.029-3.282-2-3.282-2,0-2.308,1.562-2.308,3.178v6.137H6.566V6.17h3.691V7.861h.054a4.044,4.044,0,0,1,3.641-2c3.895,0,4.611,2.565,4.611,5.9v6.808Z"
+                                                transform="translate(0 0)"
+                                                fill="#26a456"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.563" height="14.105" viewBox="0 0 18.563 15.105">
+                                        <path
+                                                id="Icon_ionic-logo-twitter"
+                                                data-name="Icon ionic-logo-twitter"
+                                                d="M19.976,6.29a7.7,7.7,0,0,1-2.187.6,3.822,3.822,0,0,0,1.676-2.108,7.567,7.567,0,0,1-2.419.924,3.807,3.807,0,0,0-6.589,2.6,3.729,3.729,0,0,0,.1.869A10.793,10.793,0,0,1,2.7,5.2a3.816,3.816,0,0,0,1.184,5.09A3.72,3.72,0,0,1,2.157,9.81v.047a3.812,3.812,0,0,0,3.056,3.737,3.834,3.834,0,0,1-1,.134,3.593,3.593,0,0,1-.716-.071A3.814,3.814,0,0,0,7.054,16.3a7.636,7.636,0,0,1-4.732,1.632,7.719,7.719,0,0,1-.909-.055,10.645,10.645,0,0,0,5.83,1.723A10.771,10.771,0,0,0,18.088,8.756c0-.165,0-.33-.012-.492A7.753,7.753,0,0,0,19.976,6.29Z"
+                                                transform="translate(-1.413 -4.5)"
+                                                fill="#26a456"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="9.942" height="18.563" viewBox="0 0 9.942 18.563">
+                                        <path
+                                                id="Icon_awesome-facebook-f"
+                                                data-name="Icon awesome-facebook-f"
+                                                d="M10.9,10.442l.516-3.359H8.192V4.9a1.68,1.68,0,0,1,1.894-1.815h1.465V.227A17.871,17.871,0,0,0,8.95,0C6.3,0,4.56,1.609,4.56,4.522v2.56H1.609v3.359H4.56v8.121H8.192V10.442Z"
+                                                transform="translate(-1.609)"
+                                                fill="#26a456"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17.916" height="17.917" viewBox="0 0 17.916 17.917">
+                                        <g id="Group_1979" data-name="Group 1979" transform="translate(-1259.297 -6416.06)">
+                                            <path
+                                                    id="Path_460"
+                                                    data-name="Path 460"
+                                                    d="M17.191,5.993a3.744,3.744,0,0,1,3.733,3.733v7.465a3.744,3.744,0,0,1-3.733,3.733H9.726a3.744,3.744,0,0,1-3.733-3.733V9.726A3.744,3.744,0,0,1,9.726,5.993h7.465m0-1.493H9.726A5.241,5.241,0,0,0,4.5,9.726v7.465a5.241,5.241,0,0,0,5.226,5.226h7.465a5.241,5.241,0,0,0,5.226-5.226V9.726A5.241,5.241,0,0,0,17.191,4.5Z"
+                                                    transform="translate(1254.797 6411.56)"
+                                                    fill="#26a456"
+                                            ></path>
+                                            <path id="Path_461" data-name="Path 461" d="M24.745,11.24a1.12,1.12,0,1,1,1.12-1.12A1.117,1.117,0,0,1,24.745,11.24Z" transform="translate(1248.364 6410.046)" fill="#26a456"></path>
+                                            <path
+                                                    id="Path_462"
+                                                    data-name="Path 462"
+                                                    d="M15.729,12.743a2.986,2.986,0,1,1-2.986,2.986,2.989,2.989,0,0,1,2.986-2.986m0-1.493a4.479,4.479,0,1,0,4.479,4.479,4.48,4.48,0,0,0-4.479-4.479Z"
+                                                    transform="translate(1252.526 6409.289)"
+                                                    fill="#26a456"
+                                            ></path>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        // Show hide popover
+        $(".dropdown a").click(function () {
+            //console.log(this);
+            $(this).parent().find(".dropdown-menu").slideToggle("fast");
+        });
+    });
+    $(document).on("click", function (event) {
+        var $trigger = $(".dropdown");
+        if ($trigger !== event.target && !$trigger.has(event.target).length) {
+            //$(".dropdown-menu").slideUp("fast");
+        }
+    });
+</script>
+<script type="text/javascript">
+    $("#joiningdate").datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $("#leavingdate").datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $("#joiningdate").datepicker("setDate", new Date());
+    $("#leavingdate").datepicker("setDate", new Date());
+</script>
+<script>
+    var divs = ["Menu0", "Menu1", "Menu2", "Menu3", "Menu4"];
+    var visibleDivId = null;
+    function toggleVisibility(divId) {
+        if (visibleDivId === divId) {
+            //visibleDivId = null;
+        } else {
+            visibleDivId = divId;
+        }
+        hideNonVisibleDivs();
+    }
+    $(".activemenucheckclass").on("click", function (e) {
+        $(".activemenucheckclass").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    function hideNonVisibleDivs() {
+        var i, divId, div;
+        for (i = 0; i < divs.length; i++) {
+            divId = divs[i];
+            div = document.getElementById(divId);
+            if (visibleDivId === divId) {
+                div.style.display = "block";
+            } else {
+                div.style.display = "none";
+            }
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#workaddButton").click(function () {
+            //$("#form1").toggle();
+            $("#addformwork").hide();
+            $("#tableworkexpirance").hide();
+            $("#workaddform1").show();
+
+        });
+
+        $("#educationaddButton").click(function () {
+            //$("#form1").toggle();
+            $("#addformeducation").hide();
+            $("#tableeducationdetails").hide();
+            $("#educationaddform1").show();
+        });
+    });
+</script>
+
+</body>
+</html>

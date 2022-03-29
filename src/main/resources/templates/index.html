@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Login</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link href="css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<div class="login-registration-main">
+    <div class="login-main-12 d-flex justify-content-md-center align-items-center vh-100">
+        <!-- <div class="login-left-side-img">
+            <img src="images/login.svg" alt="images" />
+        </div> -->
+
+        <div class="login-right-side">
+            <div class="top-main-part" id="modelinputvalueform">
+                <div class="logo-login">
+                    <img src="images/logo.svg" alt="Logo"/>
+                </div>
+                <h2>Log In</h2>
+                <form>
+                    <div class="row">
+                        <div class="col-6 col-md-12 registered-mobile-view">
+                            <div class="form-group">
+                                <label for="exampleInputFirstname">Registered Mobile<span>*</span></label>
+                                <input type="firstname" placeholder="Enter Mobile" class="form-control"
+                                       id="exampleInputFirstname" aria-describedby="emailHelp"/>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4"><a href="#" type="submit" data-toggle="modal"
+                                                       data-target="#smallModal" class="btn btn-primary">Submit</a>
+                        </div>
+                        <div class="col-6 col-md-8">
+                            <p style="font-size: 13px !important; text-align: right;">Don't have an account? <a th:href="@{/register}"
+                                                                                                                id="formButton">
+                                register</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- small modal -->
+
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="myModalLabel">Verify OTP</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-6 col-md-12">
+                        <input type="password" placeholder="" maxlength="6" class="form-control"
+                               id="exampleInputFirstname" aria-describedby="emailHelp"/>
+                    </div>
+
+                    <div class="col-6 col-md-4" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                    <div class="col-6 col-md-8">
+                        <p style="margin: 0; line-height: 50px; font-size: 13px; text-align: right;"><a href="#">Resend
+                            OTP (00:12seconds)</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $("#datepicker").datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $("#datepicker").datepicker("setDate", new Date());
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#formButton").click(function () {
+            //$("#form1").toggle();
+            $("#modelinputvalueform").hide();
+            $("#form1").show();
+        });
+    });
+</script>
+</body>
+</html>
