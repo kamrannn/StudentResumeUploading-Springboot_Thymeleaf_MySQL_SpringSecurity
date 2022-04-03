@@ -21,12 +21,6 @@
             <h2>Update Form</h2>
             <form action="#" th:action="@{/user/personal-details/update/{id}(id=${user.id})}" th:object="${user}" method="POST">
                 <div class="row register-mobile">
-                    <!--<div class="col-6 col-md-3">
-                        <div class="form-group">
-                            <input type="hidden" th:field="*{id}"/>
-                        </div>
-                    </div>-->
-
                     <div class="col-6 col-md-3">
                         <div class="form-group">
                             <label for="exampleInputTitle">Title<span>*</span></label>

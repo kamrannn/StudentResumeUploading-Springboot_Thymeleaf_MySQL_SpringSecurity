@@ -3,12 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Login</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width" />
-    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.css}" />
-    <link type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.css}" />
-    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}" />
-    <link type="text/css" rel="stylesheet" th:href="@{/css/styles.css}" />
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <div class="login-registration-main">
@@ -31,8 +31,6 @@
                         <div class="col-6 col-md-12 registered-mobile-view">
                             <div class="form-group">
                                 <label for="phoneNumber">Registered Mobile<span>*</span></label>
-                                <!--<input type="firstname" placeholder="Enter Mobile" class="form-control"
-                                       id="exampleInputFirstname" aria-describedby="emailHelp"/>-->
                                 <input type="text" placeholder="Enter Mobile" th:field="*{phoneNumber}"
                                        class="form-control" id="phoneNumber"
                                        aria-describedby="emailHelp">
@@ -65,17 +63,18 @@
                                 <div class="modal-body">
                                     <div class="row" style="margin-top: 10px;">
                                         <div class="col-6 col-md-12">
-                                            <!--<input type="password" placeholder="" maxlength="6" class="form-control"
-                                                   id="exampleInputFirstname" aria-describedby="emailHelp"/>-->
                                             <input type="text" placeholder="Enter OTP" maxlength="6" th:field="*{otp}"
                                                    class="form-control" id="otp"
-                                                   aria-describedby="emailHelp">
+                                                   aria-describedby="emailHelp"
+                                                   onkeyup="OTPValidation()">
                                             <div class="alert alert-warning" th:if="${#fields.hasErrors('otp')}"
                                                  th:errors="*{otp}"></div>
-
                                         </div>
                                         <div class="col-6 col-md-4" style="margin-top: 10px;">
-                                            <button type="submit" class="btn btn-primary">Login</button>
+                                            <button style="display: none" id="loginBtnId" type="submit"
+                                                    class="btn btn-primary">
+                                                Login
+                                            </button>
                                         </div>
                                         <div class="col-6 col-md-8">
                                             <p style="margin: 0; line-height: 50px; font-size: 13px; text-align: right;">
@@ -94,41 +93,6 @@
     </div>
 </div>
 
-<!-- small modal -->
-
-<!--
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="myModalLabel">Verify OTP</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-6 col-md-12">
-                        &lt;!&ndash;<input type="password" placeholder="" maxlength="6" class="form-control"
-                               id="exampleInputFirstname" aria-describedby="emailHelp"/>&ndash;&gt;
-                        <input type="text" placeholder="Enter OTP" maxlength="6" th:field="*{loginDTO.otp}" class="form-control" id="otp"
-                               aria-describedby="emailHelp">
-                        <div class="alert alert-warning" th:if="${#fields.hasErrors('loginDTO.otp')}" th:errors="*{loginDTO.otp}"></div>
-                    </div>
-                    <div class="col-6 col-md-4" style="margin-top: 10px;">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                    <div class="col-6 col-md-8">
-                        <p style="margin: 0; line-height: 50px; font-size: 13px; text-align: right;"><a href="#">Resend
-                            OTP (00:12seconds)</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
 <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datepicker.min.js"></script>
@@ -140,6 +104,22 @@
         todayHighlight: true,
     });
     $("#datepicker").datepicker("setDate", new Date());
+</script>
+<script>
+    let check = false;
+
+    function OTPValidation() {
+        const otp = document.getElementById("otp").value;
+        if (otp.length === 6) {
+            console.log(otp);
+            if (otp === "000000") {
+                $(document).find("#loginBtnId").show();
+                check = true;
+            } else {
+                alert("You are entering wrong OTP");
+            }
+        }
+    }
 </script>
 
 <script>

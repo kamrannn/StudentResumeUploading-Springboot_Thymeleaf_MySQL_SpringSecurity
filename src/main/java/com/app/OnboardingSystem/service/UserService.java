@@ -28,9 +28,9 @@ public class UserService implements UserDetailsService {
      *
      * @param user the user
      */
-    public ResponseEntity<Object> createUser(User user) {
-        userRepository.save(user);
-        return new ResponseEntity<>("User is successfully saved", HttpStatus.OK);
+    public User createUser(User user) {
+        return userRepository.save(user);
+//        return new ResponseEntity<>("User is successfully saved", HttpStatus.OK);
     }
 
     public void update(User user) {
@@ -48,11 +48,7 @@ public class UserService implements UserDetailsService {
 
     public User getUserById(Integer userId) {
         Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            return null;
-        }
+        return user.orElse(null);
     }
 
     @Override

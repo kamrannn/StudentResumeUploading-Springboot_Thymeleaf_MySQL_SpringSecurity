@@ -76,7 +76,7 @@ public class UserController {
     public String loginError(Model model) {
         LoginDTO loginDTO = new LoginDTO();
         model.addAttribute(loginDTO);
-        model.addAttribute("message", "Alert: Wrong phone number or otp !!");
+        model.addAttribute("message", "Alert: This phone number doesn't exists");
         return "login";
     }
 
@@ -260,6 +260,10 @@ public class UserController {
         return "application";
     }
 
+    /**
+     * From here the update sections starts
+     */
+
     @GetMapping("/user/personal-details/update")
     public String userUpdateForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -274,6 +278,11 @@ public class UserController {
     @PostMapping("/user/personal-details/update/{id}")
     public String userUpdateFormSubmission(@PathVariable(name = "id") Integer userId, @Valid User user, BindingResult result, Model model) {
         user.setId(userId);
+        String oldPhoneNumber = "";
+        Optional<User> userWithId = userRepository.findById(userId);
+        if (userWithId.isPresent()) {
+            oldPhoneNumber = userWithId.get().getPhoneNumber();
+        }
         Optional<User> userWithPhoneNumber = userRepository.findUserByPhoneNumber(user.getPhoneNumber());
         if (userWithPhoneNumber.isPresent() && !user.getId().equals(userWithPhoneNumber.get().getId())) {
             result.rejectValue("phoneNumber", null, "There is already an account registered with that phone number");
@@ -294,9 +303,14 @@ public class UserController {
         user.setWorkExperienceList(userOptional.get().getWorkExperienceList());
         user.setFileList(userOptional.get().getFileList());
         System.out.println("Personal details updated");
-        userService.createUser(user);
+        User user1 = userService.createUser(user);
         model.addAttribute("userId", user.getId());
-        return "redirect:/logout";
+        if (oldPhoneNumber.equalsIgnoreCase(user1.getPhoneNumber())) {
+            model.addAttribute("user", user1);
+            return "personal-detail";
+        } else {
+            return "redirect:/logout";
+        }
     }
 
     @GetMapping("/user/address/update/{id}")
